@@ -30,6 +30,11 @@ export function LoadingScreen({ onFinish }: { onFinish?: () => void }) {
     <motion.div
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black"
       exit={{ opacity: 0, transition: { duration: 0.5 } }}
+      role="progressbar"
+      aria-label="Loading NEXUS AI"
+      aria-valuenow={Math.round(progress)}
+      aria-valuemin={0}
+      aria-valuemax={100}
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -40,14 +45,14 @@ export function LoadingScreen({ onFinish }: { onFinish?: () => void }) {
         <div className="text-3xl font-bold tracking-[0.3em] text-white mb-8">
           NEXUS AI
         </div>
-        <div className="w-72 h-1 bg-zinc-800 rounded-full overflow-hidden">
+        <div className="w-72 h-1 bg-zinc-800 rounded-full overflow-hidden" role="presentation">
           <motion.div
             className="h-full bg-cyan-400 rounded-full"
             style={{ width: `${progress}%` }}
             transition={{ duration: 0.05 }}
           />
         </div>
-        <div className="mt-4 text-sm font-mono text-zinc-400">
+        <div className="mt-4 text-sm font-mono text-zinc-400" aria-label={`Loading progress ${progress.toFixed(0)} percent`}>
           {progress.toFixed(0)}%
         </div>
       </motion.div>

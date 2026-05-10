@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useMemo, useId } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface Particle {
   id: number;
@@ -13,24 +13,42 @@ interface Particle {
   opacity: number;
 }
 
-export function FloatingParticles({ count = 30 }: { count?: number }) {
-  const particles = useRef<Particle[]>([]);
+// Deterministic random for consistent hydration
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed * 9999) * 10000;
+  return x - Math.floor(x);
+}
 
-  useEffect(() => {
-    particles.current = Array.from({ length: count }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 2 + 1,
-      duration: Math.random() * 10 + 15,
-      delay: Math.random() * 10,
-      opacity: Math.random() * 0.4 + 0.1,
-    }));
-  }, [count]);
+export function FloatingParticles({ count = 30 }: { count?: number }) {
+  const shouldReduceMotion = useReducedMotion();
+  const baseId = useId();
+
+  const particles = useMemo<Particle[]>(
+    () =>
+      Array.from({ length: count }, (_, i) => {
+        const s1 = seededRandom(i * 1.1);
+        const s2 = seededRandom(i * 2.2);
+        const s3 = seededRandom(i * 3.3);
+        const s4 = seededRandom(i * 4.4);
+        const s5 = seededRandom(i * 5.5);
+        return {
+          id: i,
+          x: s1 * 100,
+          y: s2 * 100,
+          size: s3 * 2 + 1,
+          duration: s4 * 10 + 15,
+          delay: s5 * 10,
+          opacity: s1 * 0.4 + 0.1,
+        };
+      }),
+    [count, baseId]
+  );
+
+  if (shouldReduceMotion) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.current.map((p) => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {particles.map((p) => (
         <motion.div
           key={p.id}
           className="absolute rounded-full bg-cyan-400"

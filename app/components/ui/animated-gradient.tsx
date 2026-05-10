@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 export function AnimatedGradient() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       <motion.div
-        className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full"
+        className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full will-change-transform"
         style={{
           background:
             "radial-gradient(circle, rgba(0,240,255,0.08) 0%, transparent 70%)",
@@ -23,7 +23,7 @@ export function AnimatedGradient() {
         }}
       />
       <motion.div
-        className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full"
+        className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full will-change-transform"
         style={{
           background:
             "radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%)",
@@ -40,7 +40,7 @@ export function AnimatedGradient() {
         }}
       />
       <motion.div
-        className="absolute top-[40%] left-[40%] w-[40%] h-[40%] rounded-full"
+        className="absolute top-[40%] left-[40%] w-[40%] h-[40%] rounded-full will-change-transform"
         style={{
           background:
             "radial-gradient(circle, rgba(75,80,255,0.06) 0%, transparent 70%)",

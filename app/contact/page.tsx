@@ -104,71 +104,78 @@ export default function ContactPage() {
             <ScrollReveal className="lg:col-span-3" delay={0.1}>
               <div className="glass rounded-2xl p-6 sm:p-8">
                 <h2 className="text-xl font-bold mb-6">Send a Message</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-zinc-300 mb-2">
-                        Name
+                      <label htmlFor="contact-name" className="block text-sm font-medium text-zinc-300 mb-2">
+                        Name <span className="text-cyan-400" aria-label="required">*</span>
                       </label>
                       <input
+                        id="contact-name"
                         type="text"
                         required
+                        aria-required="true"
                         value={formData.name}
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all"
+                        className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
                         placeholder="Your name"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-zinc-300 mb-2">
-                        Email
+                      <label htmlFor="contact-email" className="block text-sm font-medium text-zinc-300 mb-2">
+                        Email <span className="text-cyan-400" aria-label="required">*</span>
                       </label>
                       <input
+                        id="contact-email"
                         type="email"
                         required
+                        aria-required="true"
                         value={formData.email}
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all"
+                        className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
                         placeholder="you@company.com"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-zinc-300 mb-2">
+                    <label htmlFor="contact-company" className="block text-sm font-medium text-zinc-300 mb-2">
                       Company
                     </label>
                     <input
+                      id="contact-company"
                       type="text"
                       value={formData.company}
                       onChange={(e) =>
                         setFormData({ ...formData, company: e.target.value })
                       }
-                      className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all"
+                      className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
                       placeholder="Acme Inc. (optional)"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-zinc-300 mb-2">
-                      Message
+                    <label htmlFor="contact-message" className="block text-sm font-medium text-zinc-300 mb-2">
+                      Message <span className="text-cyan-400" aria-label="required">*</span>
                     </label>
                     <textarea
+                      id="contact-message"
                       rows={5}
                       required
+                      aria-required="true"
                       value={formData.message}
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
                       }
-                      className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all resize-none"
+                      className="w-full px-4 py-3 bg-zinc-900/50 border border-zinc-700 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all resize-none outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
                       placeholder="Tell us about your project..."
                     />
                   </div>
                   <motion.button
                     type="submit"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-lg hover:bg-zinc-100 transition-all duration-300"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-lg hover:bg-zinc-100 transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -177,7 +184,7 @@ export default function ContactPage() {
                     ) : (
                       <>
                         Send Message
-                        <Send className="w-4 h-4" />
+                        <Send className="w-4 h-4" aria-hidden="true" />
                       </>
                     )}
                   </motion.button>
